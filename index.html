@@ -8,20 +8,33 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#dbeafe">
   
-  <meta name="mobile-web-app-capable" content="yes"
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
 
   <script src="https://cdn.tailwindcss.com"></script>
 
   <script>
-    // Register the Service Worker immediately
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js')
-          .then(reg => console.log('Service Worker Registered! Scope:', reg.scope))
+          .then(reg => console.log('Service Worker Registered!'))
           .catch(err => console.error('Service Worker Setup Failed:', err));
       });
+    }
+
+    // Project Quiz Logic
+    function runProjectQuiz(choice) {
+        const display = document.getElementById('quiz-display');
+        display.classList.remove('hidden');
+        
+        let content = "";
+        if(choice === 'web') {
+            content = "🌐 <strong>Web Focus:</strong> Check out my <b>Shareable Quiz Platform</b>. It uses Firebase for real-time data!";
+        } else if(choice === 'logic') {
+            content = "⚙️ <strong>Logic Focus:</strong> I use <b>C++ and Python</b> for structural projects like the <b>Academic Report Formatter</b>.";
+        }
+        display.innerHTML = `<div class="p-4 bg-blue-50 border-l-4 border-blue-500 text-blue-700 mt-4 rounded animate-pulse">${content}</div>`;
     }
   </script>
 </head>
@@ -37,60 +50,84 @@
   </nav>
 
   <section class="text-center py-16 bg-gradient-to-r from-blue-100 to-blue-200">
+    <div class="mb-4">
+        <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">SY Intern</span>
+    </div>
     <h2 class="text-3xl font-bold mb-4">Hello 👋, I'm Tejas</h2>
     <p class="max-w-xl mx-auto text-lg px-4">
-      I build web applications and specialize in frontend development and cloud integration. 
-      Currently pursuing a degree in Artificial Intelligence & Data Science at 
-      <strong>Zeal College of Engineering and Research, Pune</strong>.
+      I build web applications and specialize in frontend development. 
+      Currently pursuing <strong>AI & Data Science</strong> at 
+      <strong>Zeal College of Engineering, Pune</strong>.
     </p>
-    <a href="#projects" class="mt-6 inline-block bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700 transition">
-      View Projects
-    </a>
+    <div class="mt-6 flex justify-center gap-4">
+        <a href="#projects" class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700 transition">View Projects</a>
+        <a href="mailto:tejasborate82@gmail.com" class="bg-white text-blue-600 border border-blue-600 px-6 py-2 rounded-lg shadow hover:bg-blue-50 transition">Contact Me</a>
+    </div>
+  </section>
+
+  <section class="py-12 px-6 max-w-4xl mx-auto bg-white rounded-xl shadow-sm mt-[-40px] z-10 relative">
+    <h3 class="text-xl font-bold mb-4 text-center text-blue-800">Quick Project Finder 🔍</h3>
+    <p class="text-center mb-6 text-gray-600">What kind of work are you interested in seeing?</p>
+    <div class="flex flex-wrap justify-center gap-4">
+        <button onclick="runProjectQuiz('web')" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-black transition text-sm font-medium">Cloud & Web Apps</button>
+        <button onclick="runProjectQuiz('logic')" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-black transition text-sm font-medium">Tools & Logic</button>
+    </div>
+    <div id="quiz-display" class="hidden text-center"></div>
   </section>
 
   <section id="projects" class="py-12 px-6 max-w-6xl mx-auto">
     <h3 class="text-2xl font-bold mb-6 text-center">Featured Projects</h3>
     <div class="grid md:grid-cols-2 gap-8">
       
-      <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition">
+      <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-xl transition-all border-t-4 border-blue-500">
         <h4 class="text-xl font-semibold mb-2">🔵 Shareable Quiz Platform</h4>
-        <p class="mb-4">
+        <p class="mb-4 text-gray-600">
           A cloud-based quiz app that allows users to create, share, and take quizzes. 
           Built with Firebase Firestore and Authentication.
         </p>
-        <p class="text-sm text-gray-600 mb-4">Techs: HTML, JavaScript, Tailwind CSS, Firebase</p>
-        <a href="#" class="text-blue-600 hover:underline">View on GitHub</a>
+        <p class="text-sm font-mono text-blue-600 mb-4">HTML, JS, Tailwind, Firebase</p>
+        <a href="https://github.com/tejas13368" class="text-blue-600 font-bold hover:underline inline-flex items-center">
+            View Code <span class="ml-1">→</span>
+        </a>
       </div>
 
-      <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition">
+      <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-xl transition-all border-t-4 border-green-500">
         <h4 class="text-xl font-semibold mb-2">🔵 Academic Report Formatter</h4>
-        <p class="mb-4">
+        <p class="mb-4 text-gray-600">
           Tool to help students format and structure academic reports according to institutional standards.
         </p>
-        <p class="text-sm text-gray-600 mb-4">Techs: HTML, CSS, JavaScript</p>
-        <a href="#" class="text-blue-600 hover:underline">View on GitHub</a>
+        <p class="text-sm font-mono text-green-600 mb-4">HTML, CSS, JavaScript, Python Logic</p>
+        <a href="https://github.com/tejas13368" class="text-green-600 font-bold hover:underline inline-flex items-center">
+            View Code <span class="ml-1">→</span>
+        </a>
       </div>
 
     </div>
   </section>
 
-  <section id="skills" class="py-12 bg-gray-50 px-6">
-    <h3 class="text-2xl font-bold mb-6 text-center">Skills & Tools</h3>
-    <p class="text-center max-w-2xl mx-auto leading-relaxed">
-      HTML | JavaScript | Tailwind CSS | Firebase | Firestore | Git | GitHub | Academic Writing
-    </p>
+  <section id="skills" class="py-12 bg-gray-900 text-white px-6">
+    <h3 class="text-2xl font-bold mb-8 text-center">Skills & Tools</h3>
+    <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+      <span class="bg-gray-800 px-4 py-2 rounded-full border border-gray-700">HTML5</span>
+      <span class="bg-gray-800 px-4 py-2 rounded-full border border-gray-700">JavaScript</span>
+      <span class="bg-gray-800 px-4 py-2 rounded-full border border-gray-700">Python</span>
+      <span class="bg-gray-800 px-4 py-2 rounded-full border border-gray-700">C++</span>
+      <span class="bg-gray-800 px-4 py-2 rounded-full border border-gray-700">Tailwind CSS</span>
+      <span class="bg-gray-800 px-4 py-2 rounded-full border border-gray-700">Firebase</span>
+      <span class="bg-gray-800 px-4 py-2 rounded-full border border-gray-700">Git/GitHub</span>
+    </div>
   </section>
 
-  <section id="contact" class="py-12 px-6 text-center">
-    <h3 class="text-2xl font-bold mb-6">Contact</h3>
-    <p class="mb-4">Email: <a href="mailto:tejasborate82@gmail.com" class="text-blue-600 hover:underline">tejasborate82@gmail.com</a></p>
-    <a href="mailto:tejasborate82@gmail.com" class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700 transition">
-      Email Tejas
+  <section id="contact" class="py-20 px-6 text-center">
+    <h3 class="text-3xl font-bold mb-4">Get In Touch</h3>
+    <p class="mb-8 text-gray-600 max-w-md mx-auto">I'm currently looking for internship opportunities. Feel free to reach out!</p>
+    <a href="mailto:tejasborate82@gmail.com" class="bg-blue-600 text-white px-8 py-3 rounded-full shadow-lg hover:bg-blue-700 transition transform hover:scale-105 inline-block font-bold">
+      tejasborate82@gmail.com
     </a>
   </section>
 
-  <footer class="bg-white shadow-inner py-6 text-center text-sm text-gray-600">
-    © 2025 Tejas Borate. All rights reserved.
+  <footer class="bg-white border-t py-8 text-center text-sm text-gray-500">
+    <p>© 2025 Tejas Borate | Built with Tailwind CSS</p>
   </footer>
 
 </body>
